@@ -14,8 +14,10 @@
 package io.trino.util;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
@@ -32,6 +34,13 @@ public final class MoreLists
     {
         return requireNonNull(lists, "lists is null").stream()
                 .map(ImmutableList::copyOf)
+                .collect(toImmutableList());
+    }
+
+    public static <T> List<Set<T>> listOfSetsCopy(List<Set<T>> sets)
+    {
+        return requireNonNull(sets, "sets is null").stream()
+                .map(ImmutableSet::copyOf)
                 .collect(toImmutableList());
     }
 
